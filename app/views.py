@@ -1,4 +1,4 @@
-from flask import render_template
+from flask import render_template,send_from_directory
 
 from app import app
 
@@ -11,3 +11,7 @@ def index():
 @app.route('/about')
 def about():
     return render_template("about.html")
+
+@app.route('/<path:path>')
+def send_js(path):
+    return send_from_directory('/c/Users/thelonius/git/testunk', path)
