@@ -1,7 +1,7 @@
 from flask import render_template,send_from_directory
 
 from app import app
-
+import os
 
 @app.route('/')
 def index():
@@ -13,5 +13,8 @@ def about():
     return render_template("about.html")
 
 @app.route('/<path:path>')
-def send_js(path):
-    return send_from_directory('/c/Users/thelonius/git/testunk', path)
+def sendfiles(path):
+    try:
+        return send_from_directory(os.environ['flaskroot'], path)
+    except Exception as e:
+        return send_from_directory(os.environ['flaskroot'], os.path.join(path, "index.html"))
